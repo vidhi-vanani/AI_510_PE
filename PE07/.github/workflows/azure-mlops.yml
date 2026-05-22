@@ -1,0 +1,35 @@
+name: Azure-MLOps-CICD-Simulation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  azure-mlops:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Train Model (Simulate Azure Compute)
+        run: |
+          python train_to_azure.py
+
+      - name: Deploy Model (Simulate Azure Endpoint)
+        run: |
+          python deploy_azure_model.py
+
+      - name: Monitor Deployment (Simulate Azure Monitor)
+        run: |
+          python monitor_azure.py
